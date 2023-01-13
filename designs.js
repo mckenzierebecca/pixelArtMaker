@@ -16,7 +16,7 @@ sizePicker.addEventListener('submit', function(event) {
     makeGrid(rows, columns);
     });
 
-//function to make the grid
+// Function to make the grid
 function makeGrid(rows, columns) {
     table.innerHTML = "";
     for (var i = 0; i < rows; i++) {
