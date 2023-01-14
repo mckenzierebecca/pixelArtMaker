@@ -1,31 +1,36 @@
 // Set color picker and size picker
-var colorPicker = document.getElementById('colorPicker');
-var table = document.getElementById('pixelCanvas');
-var sizePicker = document.getElementById('sizePicker');
+const colorPicker = document.getElementById('colorPicker');
+const table = document.getElementById('pixelCanvas');
+const sizePicker = document.getElementById('sizePicker');
 
-// Create first row and cell
-var rows = document.getElementById('inputHeight').value;
-var columns = document.getElementById('inputWidth').value;
-makeGrid(rows, columns);
+// Create global variables to represent table height (rows) and width (columns)
+// Create initial grid when page has loaded
+const inputHeight = document.getElementById('inputHeight');
+const inputWidth = document.getElementById('inputWidth');
+makeGrid(inputHeight.value, inputWidth.value);
 
 // When size is submitted by the user, call makeGrid()
 sizePicker.addEventListener('submit', function(event) {
     event.preventDefault();
-    var rows = document.getElementById('inputHeight').value;
-    var columns = document.getElementById('inputWidth').value;
-    makeGrid(rows, columns);
+    let height = inputHeight.value;
+    let width = inputWidth.value;
+    makeGrid(height, width);
     });
 
-// Function to make the grid
-function makeGrid(rows, columns) {
+/**
+  * @desc create a grid of squares
+  * @param int $height - number of squares representing the height of the grid
+  * @param int $width - number of squares representing the width of the grid
+*/
+function makeGrid(height, width) {
     table.innerHTML = "";
-    for (var i = 0; i < rows; i++) {
-        var row = table.insertRow(i);
-        for (var j = 0; j < columns; j++) {
-            var cell = row.insertCell(j);
-            cell.addEventListener('click', function(event) {
-                cell.style.backgroundColor = colorPicker.value;
-            });
+    for (var i = 0; i < height; i++) {
+      var row = table.insertRow(i);
+      for (var j = 0; j < width; j++) {
+          var cell = row.insertCell(j);
+          cell.addEventListener('click', function(e) {
+            e.target.style.backgroundColor = colorPicker.value;
+          })
         }
+      }
     }
-}
